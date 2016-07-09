@@ -22,7 +22,7 @@ class CoursesPage extends React.Component {
     }
 
     onClickSave() {
-        this.props.dispatch(courseActions.createCourse(this.state.course));
+        this.props.createCourse(this.state.course);
 
     }
 
@@ -33,7 +33,6 @@ class CoursesPage extends React.Component {
     }
 
     render() {
-        debugger;
         return (
             <div>
                 <h1>Courses</h1> 
@@ -53,17 +52,35 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.propTypes =  {
-    dispatch: PropTypes.func.isRequired,
-    courses: PropTypes.array.isRequired
+//    dispatch: PropTypes.func.isRequired,
+    courses: PropTypes.array.isRequired,
+    createCourse: PropTypes.func.isRequired
 };
 
+// state is the new state and we define
+// what to do with it
+// here we store the state in this.props.courses
+// so that render() can take that state via this.props.courses
 function mapStateToProps(state, ownProps) {
     // state.courses is the courseReducer
-    debugger;
-    return {
+     return {
         courses: state.courses
     };
 }
 
+// dispatch is a function
+function mapDispatchToProps(dispatch) {
+    // arrow function (a,b) => {...}
+    // when only one parameter than
+    // a => ...
+    // is possible
+    //
+    // use createCourse in onClickSave()
+    return {
+        createCourse: course => dispatch(courseActions.createCourse(course))
+    };
+}
 
-export default connect(mapStateToProps)(CoursesPage);
+// when add mapDispatchToProps to connect, than
+// this.props.dispatch is no longer injected
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
