@@ -1,11 +1,29 @@
 
-export default function courseReducer(state = [], action) {
+import * as types from '../actions/actionTypes';
+import initialState from './initialState';
+
+
+export default function courseReducer(state = initialState.courses, action) {
     switch (action.type) {
-        case 'CREATE_COURSE':
+
+        case types.LOAD_COURSES_SUCCESS:
+            return action.courses;
+
+        case types.CREATE_COURSE_SUCCESS: 
+            // copy the course with Object.assign({}, action.course)
             // spread operator ES6
-            return [...state,
+            return [
+                ...state,
                 Object.assign({}, action.course)
             ];
+
+        case types.UPDATE_COURSE_SUCCESS:
+            // spread all courses, but not the course with "my" id 
+            return [
+                ...state.filter(course => course.id !== action.course.id),
+                Object.assign({}, action.course)
+            ];
+
 
         default:
             return state;
