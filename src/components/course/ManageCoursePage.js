@@ -18,7 +18,6 @@ class ManageCoursePage extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
         if (this.props.course.id != nextProps.course.id) {
             this.setState({course:Object.assign({}, nextProps.course)});
         }
@@ -75,9 +74,8 @@ function getCourseById(courses, id) {
 // do here translation from the data getting from the Api and
 // the data using in the component 
 function mapStateToProps(state, ownProps) {
-    const courseId = ownProps.params.id // from the path /course/:id
+    const courseId = ownProps.params.id; // from the path /course/:id
 
-    debugger;
     let course = {id: '', watchHref:'', title:'', authorId:'', length:'', category:''};
     if (courseId  &&  state.courses.length > 0) {
         course = getCourseById(state.courses, courseId);
