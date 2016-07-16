@@ -32,4 +32,5 @@ describe('CourseForm via Enzyme', () => {
     });
 
 
-})
+});
+
