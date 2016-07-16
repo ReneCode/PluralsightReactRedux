@@ -11,6 +11,7 @@ import {loadAuthors} from './actions/authorActions';
 // webpack can import CSS files too
 import './styles/styles.css';   
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();
 // start with an initial action: loadCourses, loadAuthors
